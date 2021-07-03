@@ -1,0 +1,36 @@
+{
+  "id": 1,
+  "name": "Иванов Иван Иванович",
+  "fields": [
+    {
+      "field_id": 1,
+      "field_name": "Телефон",
+      "field_value": "8-913-789-77-77",
+      "field_contact_id": 1
+    },
+    {
+      "field_id": 2,
+      "field_name": "Адрес",
+      "field_value": "г. Новосибирск, ул. Мира, 15, кв. 23",
+      "field_contact_id": 1
+    },
+    {
+      "field_id": 3,
+      "field_name": "E-mail",
+      "field_value": "info@yandex.ru",
+      "field_contact_id": 1
+    },
+    {
+      "field_id": 4,
+      "field_name": "Рабочий телефон",
+      "field_value": "8-912-555-55-55",
+      "field_contact_id": 1
+    },
+    {
+      "field_id": 5,
+      "field_name": "Организация",
+      "field_value": "Завод крупного домостроения",
+      "field_contact_id": 1
+    }
+  ]
+}

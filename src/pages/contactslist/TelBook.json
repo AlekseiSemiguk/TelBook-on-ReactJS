@@ -1,0 +1,116 @@
+[
+  {
+    "id": 1,
+    "name": "Иванов Иван Иванович",
+    "fields": [
+      {
+        "field_id":  1,
+        "field_name": "Телефон",
+        "field_value": "8-913-789-77-77",
+        "field_contact_id":  1
+      },
+      {
+        "field_id": 2,
+        "field_name": "Адрес",
+        "field_value": "г. Новосибирск, ул. Мира, 15, кв. 23",
+        "field_contact_id": 1
+      },
+      {
+        "field_id": 3,
+        "field_name": "E-mail",
+        "field_value": "info@yandex.ru",
+        "field_contact_id": 1
+      },
+      {
+        "field_id": 4,
+        "field_name": "Рабочий телефон",
+        "field_value": "8-912-555-55-55",
+        "field_contact_id": 1
+      },
+      {
+        "field_id": 5,
+        "field_name": "Организация",
+        "field_value": "Завод крупного домостроения",
+        "field_contact_id": 1
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Петров Петр Игоревич",
+    "fields": [
+      {
+        "field_id": 6,
+        "field_name": "Телефон",
+        "field_value": "8-913-129-77-77",
+        "field_contact_id": 2
+      },
+      {
+        "field_id": 7,
+        "field_name": "Адрес",
+        "field_value": "г. Красноярск, ул. Дружбы, 15, кв. 23",
+        "field_contact_id": 2
+      },
+      {
+        "field_id": 8,
+        "field_name": "E-mail",
+        "field_value": "info@mail.ru",
+        "field_contact_id": 2
+      },
+      {
+        "field_id": 9,
+        "field_name": "Рабочий телефон",
+        "field_value": "8-912-522-55-55",
+        "field_contact_id": 2
+      },
+      {
+        "field_id": 10,
+        "field_name": "Организация",
+        "field_value": "Завод металлических изделий",
+        "field_contact_id": 2
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Сергеев Иннокентий Петрович",
+    "fields": [
+      {
+        "field_id": 11,
+        "field_name": "Телефон",
+        "field_value": "8-913-789-21-77",
+        "field_contact_id": 3
+      },
+      {
+        "field_id": 12,
+        "field_name": "E-mail",
+        "field_value": "info3@ya.ru",
+        "field_contact_id": 3
+      },
+      {
+        "field_id": 13,
+        "field_name": "Домашний телефон",
+        "field_value": "8-3822-555-55-55",
+        "field_contact_id": 3
+      },
+      {
+        "field_id": 14,
+        "field_name": "Организация",
+        "field_value": "Такси",
+        "field_contact_id": 3
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Антипов Яков Петрович",
+    "fields": [
+      {
+        "field_id": 15,
+        "field_name": "Телефон",
+        "field_value": "8-153-789-77-77",
+        "field_contact_id": 4
+      }
+    ]
+  }
+]
