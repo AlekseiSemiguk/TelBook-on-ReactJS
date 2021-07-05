@@ -10,7 +10,7 @@ export const EditContactPage = () => {
     const { contactId } = useParams();
 
     const [appContactInfoState, setContactInfoState] = useState({
-        info: null,
+        info: null
     });
 
     useEffect(() => {
@@ -21,8 +21,10 @@ export const EditContactPage = () => {
             .then((data) => setContactInfoState({ info: data }));
     }, [setContactInfoState]);
 
+    
+
     return (
-        <EditContact info={appContactInfoState.info} />
+        <EditContact type="edit_contact" setContactInfoState={setContactInfoState} appContactInfoState={appContactInfoState} />
     )
 
 };

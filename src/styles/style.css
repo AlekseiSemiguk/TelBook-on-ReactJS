@@ -1,3 +1,5 @@
+@charset "UTF-8";
+
 body, input, label {
     font-size: 24px;
     line-height: 28px;
@@ -154,5 +156,89 @@ body, input, label {
 .contact-edit__container {
     max-width: 800px;
     margin: 0 auto;
+}
+
+.contact-edit__submit {
+    margin-top: 30px;
+    background: antiquewhite;
+    padding: 5px 20px;
+    border: 1px solid black;
+    cursor: pointer;
+}
+
+.contact_add {
+    background: antiquewhite;
+    display: inline-block;
+    border: 1px solid black;
+    margin-top: 30px;
+    padding: 5px 20px;
+}
+
+.contact-new-field {
+    padding: 15px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    margin-top: 40px;
+    background: #eeeeee;
+}
+
+.contact_fieldadd_button {
+    background: antiquewhite;
+    -ms-flex-item-align: start;
+    align-self: flex-start;
+    border: 1px solid black;
+    margin-top: 10px;
+    padding: 5px 20px;
+    cursor: pointer;
+}
+
+.contact-edit__error {
+    margin-top: 10px;
+    color: red;
+}
+
+.modal-window__background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.modal-window {
+    position: relative;
+    width: 400px;
+    top: calc(50vh - 100px);
+    left: calc(50vw - 200px);
+    background: #ebebeb;
+    padding: 30px;
+}
+
+.modal-window__text {
+    text-align: center;
+}
+
+.modal-window__buttons {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: distribute;
+    justify-content: space-around;
+    margin-top: 30px;
+}
+
+.modal-window__button {
+    border: 1px solid black;
+    background: antiquewhite;
+    width: 100px;
+    padding: 0px 5px;
+    text-align: center;
+    cursor: pointer;
 }
 /*# sourceMappingURL=style.css.map */

@@ -45,6 +45,9 @@
     <Content Include="src\img\info_icon.jpg" />
     <Content Include="src\pages\contactslist\TelBook.json" />
     <Content Include="src\pages\editcontact\1.json" />
+    <Content Include="src\pages\editcontact\2.json" />
+    <Content Include="src\pages\editcontact\3.json" />
+    <Content Include="src\pages\editcontact\4.json" />
     <Content Include="src\styles\style.css">
       <SubType>Code</SubType>
     </Content>

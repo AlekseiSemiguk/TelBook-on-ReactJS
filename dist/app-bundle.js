@@ -32740,15 +32740,51 @@ exports.ContactInfo = function (props) {
 
 "use strict";
 
+var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+var react_1 = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 var contactinfo_1 = __webpack_require__(/*! ../../components/contactinfo */ "./src/components/contactinfo/index.tsx");
 var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 exports.ContactsList = function (props) {
+    var _a = react_1.useState(false), appShowModalWindow = _a[0], setShowModalWindow = _a[1];
+    var _b = react_1.useState(null), appDeletedContact = _b[0], setDeletedContact = _b[1];
+    var handleDeleteContact = function (del_contactId) {
+        setDeletedContact(del_contactId);
+        setShowModalWindow(true);
+    };
+    var handleConfirmAction = function () {
+        var message = { "action": "delete", "deleted_contact_id": appDeletedContact };
+        fetch('https://httpbin.org/post', {
+            method: 'post',
+            headers: {
+                'Accept': 'application/json, text/plain, */*',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(message)
+        })
+            .then(function (res) { return res.json(); })
+            .then(function (res) { return console.log(res); });
+        setDeletedContact(null);
+        setShowModalWindow(false);
+    };
+    var handleCancelAction = function () {
+        setDeletedContact(null);
+        setShowModalWindow(false);
+    };
     var contacts = props.contacts;
     console.log(contacts);
     if (!contacts || contacts.length === 0)
         return React.createElement("p", null, "\u0412 \u0442\u0435\u043B\u0435\u0444\u043E\u043D\u043D\u043E\u0439 \u043A\u043D\u0438\u0433\u0435 \u043D\u0435\u0442 \u043A\u043E\u043D\u0442\u0430\u043A\u0442\u043E\u0432");
+    var modalwindow;
+    if (appShowModalWindow == true) {
+        modalwindow = (React.createElement("div", { className: "modal-window__background" },
+            React.createElement("div", { className: "modal-window" },
+                React.createElement("div", { className: "modal-window__text" }, "\u041F\u043E\u0434\u0442\u0432\u0435\u0440\u0434\u0438\u0442\u0435 \u0443\u0434\u0430\u043B\u0435\u043D\u0438\u0435 \u043A\u043E\u043D\u0442\u0430\u043A\u0442\u0430"),
+                React.createElement("div", { className: "modal-window__buttons" },
+                    React.createElement("div", { className: "modal-window__button", onClick: handleConfirmAction }, "\u041E\u041A"),
+                    React.createElement("div", { className: "modal-window__button", onClick: handleCancelAction }, "\u041E\u0442\u043C\u0435\u043D\u0430")))));
+    }
     return (React.createElement("div", { className: "contact__container" },
         React.createElement("h2", null, "\u0422\u0435\u043B\u0435\u0444\u043E\u043D\u043D\u044B\u0439 \u0441\u043F\u0440\u0430\u0432\u043E\u0447\u043D\u0438\u043A"),
         React.createElement("ul", { className: "contact__list" }, contacts.map(function (contact) {
@@ -32760,14 +32796,17 @@ exports.ContactsList = function (props) {
                             React.createElement("div", { className: "contact__icon" },
                                 React.createElement(react_router_dom_1.Link, { to: "/edit/" + contact.id },
                                     React.createElement("img", { src: "/src/img/edit_icon.png", alt: "edit" }))),
-                            React.createElement("div", { className: "contact__icon" },
+                            React.createElement("div", { className: "contact__icon", onClick: handleDeleteContact.bind(_this, contact.id) },
                                 React.createElement("img", { src: "/src/img/delete_icon.png", alt: "delete" })),
                             React.createElement("label", { htmlFor: contact.id, className: "contact__icon" },
                                 React.createElement("img", { src: "/src/img/info_icon.jpg", alt: "toggle" })))),
                     React.createElement("input", { className: "contact-checkbox", type: "checkbox", id: contact.id }),
                     React.createElement("div", { className: "contact__info__container info-container-js" },
                         React.createElement(contactinfo_1.ContactInfo, { info: contact.fields })))));
-        }))));
+        })),
+        React.createElement(react_router_dom_1.Link, { to: "/create" },
+            React.createElement("div", { className: "contact_add" }, "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u0437\u0430\u043F\u0438\u0441\u044C")),
+        modalwindow));
 };
 
 
@@ -32782,25 +32821,124 @@ exports.ContactsList = function (props) {
 
 "use strict";
 
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+var __spreadArrays = (this && this.__spreadArrays) || function () {
+    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
+    for (var r = Array(s), k = 0, i = 0; i < il; i++)
+        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
+            r[k] = a[j];
+    return r;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+var react_1 = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 exports.EditContact = function (props) {
-    var info = props.info;
-    console.log(info);
+    var _a = react_1.useState(""), appNewFieldNameState = _a[0], setNewFieldNameState = _a[1];
+    var _b = react_1.useState(1), appNewFieldId = _b[0], setNewFieldId = _b[1];
+    var _c = react_1.useState([]), appErrors = _c[0], setErrors = _c[1];
+    var setContactInfoState = props.setContactInfoState;
+    var appContactInfoState = props.appContactInfoState;
+    var type = props.type;
+    var info = appContactInfoState.info;
     if (!info || info.length === 0)
         return React.createElement("p", null);
+    function handleSubmit(e) {
+        e.preventDefault();
+        if (appContactInfoState.info.name == "") {
+            setErrors(['Поле "Имя" не может быть пустым']);
+        }
+        else {
+            setErrors([]);
+            console.log(JSON.stringify(appContactInfoState.info));
+            fetch('https://httpbin.org/post', {
+                method: 'post',
+                headers: {
+                    'Accept': 'application/json, text/plain, */*',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(appContactInfoState.info)
+            })
+                .then(function (res) { return res.json(); })
+                .then(function (res) { return console.log(res); });
+        }
+    }
+    var handleChangeName = function (e) {
+        var _a = e.target, name = _a.name, value = _a.value;
+        setContactInfoState(function (prevState) {
+            var _a;
+            return (__assign(__assign({}, prevState), { info: __assign(__assign({}, prevState.info), (_a = {}, _a[name] = value, _a)) }));
+        });
+        console.log(appContactInfoState);
+    };
+    var handleChangeField = function (e) {
+        var _a = e.target, name = _a.name, value = _a.value;
+        var field_id = info.fields[name].field_id;
+        var field_name = info.fields[name].field_name;
+        setContactInfoState(function (prevState) { return (__assign(__assign({}, prevState), { info: __assign(__assign({}, prevState.info), { fields: __spreadArrays(prevState.info.fields.slice(0, name), [{
+                        'field_id': field_id, 'field_name': field_name, 'field_value': value
+                    }], prevState.info.fields.slice(+name + 1)) }) })); });
+        console.log(appContactInfoState);
+    };
+    var handleChangeNewFieldName = function (e) {
+        var value = e.target.value;
+        setNewFieldNameState(value);
+    };
+    var handleNewField = function (e) {
+        if (appNewFieldNameState == "") {
+            setErrors(["Введите название нового поля"]);
+        }
+        else {
+            setErrors([]);
+            var field_id_1 = "not_assigned " + appNewFieldId;
+            setNewFieldId(appNewFieldId + 1);
+            var field_name_1 = appNewFieldNameState;
+            setContactInfoState(function (prevState) { return (__assign(__assign({}, prevState), { info: __assign(__assign({}, prevState.info), { fields: __spreadArrays(prevState.info.fields.slice(0), [{ 'field_id': field_id_1, 'field_name': field_name_1, 'field_value': "" }]) }) })); });
+            setNewFieldNameState("");
+        }
+    };
+    var label;
+    if (type == "new_contact") {
+        label = React.createElement("h2", null, "\u0421\u043E\u0437\u0434\u0430\u0442\u044C \u043D\u043E\u0432\u0443\u044E \u0437\u0430\u043F\u0438\u0441\u044C");
+    }
+    else if (type == "edit_contact") {
+        label = React.createElement("h2", null, "\u0420\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u0437\u0430\u043F\u0438\u0441\u044C");
+    }
+    var errors;
+    if (appErrors) {
+        errors = (appErrors.map(function (error) {
+            return (React.createElement("div", { className: "contact-edit__error" }, error));
+        }));
+    }
+    console.log(appErrors);
     return (React.createElement("div", { className: "contact-edit__container" },
-        React.createElement("h2", null, "\u0420\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u0437\u0430\u043F\u0438\u0441\u044C"),
-        React.createElement("div", { className: "contact-edit__info" },
+        label,
+        React.createElement("form", { className: "contact-edit__info", onSubmit: handleSubmit },
             React.createElement("label", { className: "contact__name" },
                 "\u0418\u043C\u044F",
-                React.createElement("input", { className: "contact__field__input", type: "text", defaultValue: info.name })),
-            info.fields.map(function (field) {
+                React.createElement("input", { name: "name", onChange: handleChangeName, className: "contact__field__input", type: "text", defaultValue: info.name })),
+            info.fields.map(function (field, current) {
                 return (React.createElement("div", { className: "contact__field", key: field.field_id },
                     React.createElement("label", null,
                         field.field_name,
-                        React.createElement("input", { className: "contact__field__input", type: "text", defaultValue: field.field_value }))));
-            }))));
+                        React.createElement("input", { name: current, onChange: handleChangeField, className: "contact__field__input", type: "text", defaultValue: field.field_value }))));
+            }),
+            React.createElement("div", { className: "contact-new-field" },
+                React.createElement("label", null,
+                    "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u043D\u043E\u0432\u043E\u0435 \u043F\u043E\u043B\u0435",
+                    React.createElement("input", { onChange: handleChangeNewFieldName, name: "new_field", className: "contact__field__input", type: "text", placeholder: "\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u043F\u043E\u043B\u044F", value: appNewFieldNameState })),
+                React.createElement("div", { onClick: handleNewField, className: "contact_fieldadd_button" }, "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C")),
+            errors,
+            React.createElement("input", { className: "contact-edit__submit", type: "submit", value: "\u0421\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C \u0438\u0437\u043C\u0435\u043D\u0435\u043D\u0438\u044F" }))));
 };
 
 
@@ -32828,7 +32966,7 @@ exports.ContactsListPage = function () {
         fetch(apiUrl)
             .then(function (response) { return response.json(); })
             //.then((data) => console.log('This is your data', data));
-            .then(function (data) { return setContactsState({ contacts: data }); });
+            .then(function (data) { return setContactsState({ contacts: data.contacts }); });
     }, [setContactsState]);
     return (React.createElement(contactslist_1.ContactsList, { contacts: appContactsState.contacts }));
 };
@@ -32847,7 +32985,18 @@ exports.ContactsListPage = function () {
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-exports.CreateContactPage = function () { return React.createElement("h2", null, "\u0421\u043E\u0437\u0434\u0430\u0442\u044C \u043D\u043E\u0432\u0443\u044E \u0437\u0430\u043F\u0438\u0441\u044C"); };
+var editcontact_1 = __webpack_require__(/*! ../../components/editcontact */ "./src/components/editcontact/index.tsx");
+var react_1 = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+exports.CreateContactPage = function () {
+    var _a = react_1.useState({
+        info: {
+            "id": "new_contact",
+            "name": "",
+            "fields": []
+        }
+    }), appContactInfoState = _a[0], setContactInfoState = _a[1];
+    return (React.createElement(editcontact_1.EditContact, { type: "new_contact", setContactInfoState: setContactInfoState, appContactInfoState: appContactInfoState }));
+};
 
 
 /***/ }),
@@ -32869,7 +33018,7 @@ var editcontact_1 = __webpack_require__(/*! ../../components/editcontact */ "./s
 exports.EditContactPage = function () {
     var contactId = react_router_dom_1.useParams().contactId;
     var _a = react_1.useState({
-        info: null,
+        info: null
     }), appContactInfoState = _a[0], setContactInfoState = _a[1];
     react_1.useEffect(function () {
         var apiUrl = '../src/pages/editcontact/' + contactId + '.json';
@@ -32878,7 +33027,7 @@ exports.EditContactPage = function () {
             //.then((data) => console.log('This is your data', data));
             .then(function (data) { return setContactInfoState({ info: data }); });
     }, [setContactInfoState]);
-    return (React.createElement(editcontact_1.EditContact, { info: appContactInfoState.info }));
+    return (React.createElement(editcontact_1.EditContact, { type: "edit_contact", setContactInfoState: setContactInfoState, appContactInfoState: appContactInfoState }));
 };
 
 

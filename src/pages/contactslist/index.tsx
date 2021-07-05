@@ -13,7 +13,7 @@ export const ContactsListPage = () => {
         fetch(apiUrl)
             .then((response) => response.json())
             //.then((data) => console.log('This is your data', data));
-            .then((data) => setContactsState({ contacts: data }));
+            .then((data) => setContactsState({ contacts: data.contacts }));
     }, [setContactsState]);
 
     return (

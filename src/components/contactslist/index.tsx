@@ -1,5 +1,6 @@
 declare var require: any;
 var React = require('react');
+import { useState } from 'react';
 import { ContactInfo } from "../../components/contactinfo";
 import {
     BrowserRouter as Router,
@@ -9,10 +10,57 @@ import {
 } from 'react-router-dom';
 
 export const ContactsList = (props) => {
-    
+
+    const [appShowModalWindow, setShowModalWindow] = useState(false);
+    const [appDeletedContact, setDeletedContact] = useState(null);
+
+    const handleDeleteContact = (del_contactId) => {
+        setDeletedContact(del_contactId);
+        setShowModalWindow(true);
+    }
+
+    const handleConfirmAction = () => {
+
+        let message = {"action": "delete", "deleted_contact_id": appDeletedContact}
+
+        fetch('https://httpbin.org/post', {
+            method: 'post',
+            headers: {
+                'Accept': 'application/json, text/plain, */*',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(message)
+        })
+            .then(res => res.json())
+            .then(res => console.log(res));
+        setDeletedContact(null);
+        setShowModalWindow(false);
+    }
+
+    const handleCancelAction = () => {
+        setDeletedContact(null);
+        setShowModalWindow(false);
+    }
+
     const { contacts } = props;
     console.log(contacts);
     if (!contacts || contacts.length === 0) return <p>В телефонной книге нет контактов</p>;
+
+    let modalwindow;
+
+    if (appShowModalWindow == true) {
+        modalwindow = (
+            <div className="modal-window__background">
+                <div className="modal-window">
+                    <div className="modal-window__text">Подтвердите удаление контакта</div>
+                    <div className="modal-window__buttons">
+                        <div className="modal-window__button" onClick={handleConfirmAction}>ОК</div>
+                        <div className="modal-window__button" onClick={handleCancelAction}>Отмена</div>
+                    </div>
+                </div>
+            </div>
+        )
+    }
     
     return (
         <div className="contact__container">
@@ -27,11 +75,10 @@ export const ContactsList = (props) => {
                                     <div className="contact__icons">
                                         <div className="contact__icon">
                                             <Link to={"/edit/" + contact.id}>
-                                            
                                             <img src="/src/img/edit_icon.png" alt="edit" />
                                             </Link>
                                         </div>
-                                        <div className="contact__icon">
+                                        <div className="contact__icon" onClick={handleDeleteContact.bind(this, contact.id)}>
                                             <img src="/src/img/delete_icon.png" alt="delete" />
                                         </div>
                                         <label htmlFor={contact.id} className="contact__icon">
@@ -48,6 +95,10 @@ export const ContactsList = (props) => {
                     );
                 })}
             </ul>
+            <Link to={"/create"}>
+                <div className="contact_add">Добавить запись</div>
+            </Link>
+            {modalwindow}
         </div>
     );
 };
