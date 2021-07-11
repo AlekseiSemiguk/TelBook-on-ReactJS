@@ -43,6 +43,8 @@
     <Content Include="src\img\delete_icon.png" />
     <Content Include="src\img\edit_icon.png" />
     <Content Include="src\img\info_icon.jpg" />
+    <Content Include="src\img\on_main.png" />
+    <Content Include="src\img\undelete_icon.png" />
     <Content Include="src\pages\contactslist\TelBook.json" />
     <Content Include="src\pages\editcontact\1.json" />
     <Content Include="src\pages\editcontact\2.json" />
@@ -64,8 +66,9 @@
     <Folder Include="src\app\" />
     <Folder Include="src\components\" />
     <Folder Include="src\components\contactslist\" />
-    <Folder Include="src\components\contactinfo\" />
+    <Folder Include="src\components\modal\" />
     <Folder Include="src\components\editcontact\" />
+    <Folder Include="src\components\request\" />
     <Folder Include="src\img\" />
     <Folder Include="src\styles\" />
     <Folder Include="src\pages\" />
@@ -77,9 +80,19 @@
     <TypeScriptCompile Include="app.tsx">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="src\components\contactinfo\index.tsx" />
+    <TypeScriptCompile Include="src\components\contactslist\contacts.tsx">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\components\contactslist\fields.tsx" />
     <TypeScriptCompile Include="src\components\contactslist\index.tsx" />
+    <TypeScriptCompile Include="src\components\editcontact\addnewfield.tsx" />
+    <TypeScriptCompile Include="src\components\editcontact\namefield.tsx" />
+    <TypeScriptCompile Include="src\components\editcontact\fields.tsx" />
+    <TypeScriptCompile Include="src\components\editcontact\errors.tsx" />
+    <TypeScriptCompile Include="src\components\modal\confirm.tsx" />
     <TypeScriptCompile Include="src\components\editcontact\index.tsx" />
+    <TypeScriptCompile Include="src\components\modal\success.tsx" />
+    <TypeScriptCompile Include="src\components\request\index.tsx" />
     <TypeScriptCompile Include="src\pages\contactslist\index.tsx" />
     <TypeScriptCompile Include="src\pages\createcontact\index.tsx" />
     <TypeScriptCompile Include="src\pages\editcontact\index.tsx" />

@@ -1,8 +1,10 @@
 declare var require: any;
 var React = require('react');
 
-export const ContactInfo = (props) => {
-    let { info } = props;
+
+export const Fields = (props) => {
+    const { info } = props;
+
     if (!info || info.length === 0) return <p>Информация о контакте отсутствует</p>;
     return (
         <div className="contact__info">

@@ -3,8 +3,9 @@ var React = require('react');
 import { EditContact } from "../../components/editcontact";
 import { useState } from 'react';
 
-export const CreateContactPage = () => {
-    const [appContactInfoState, setContactInfoState] = useState({
+export const CreateContactPage = (props) => {
+    const { addLogRequest } = props;
+    const [contactInfoState, setContactInfoState] = useState({
         info: {
             "id": "new_contact",
             "name": "",
@@ -13,7 +14,7 @@ export const CreateContactPage = () => {
     });
     
     return (
-        <EditContact type="new_contact" setContactInfoState={setContactInfoState} appContactInfoState={appContactInfoState} />
+        <EditContact type="new_contact" setContactInfoState={setContactInfoState} contactInfoState={contactInfoState} addLogRequest={addLogRequest}/>
     )
     
 };

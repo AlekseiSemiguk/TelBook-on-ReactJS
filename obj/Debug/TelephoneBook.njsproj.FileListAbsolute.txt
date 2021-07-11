@@ -1,0 +1,3 @@
+C:\Users\Home\source\repos\TelephoneBook\TelephoneBook\obj\Debug\TelephoneBook.njsproj.AssemblyReference.cache
+C:\Users\Home\source\repos\TelephoneBook\TelephoneBook\obj\Debug\TelephoneBook.njsproj.CoreCompileInputs.cache
+C:\Users\Home\source\repos\TelephoneBook\TelephoneBook\bin\Microsoft.NodejsTools.WebRole.dll

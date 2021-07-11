@@ -1,6 +1,5 @@
 declare var require: any;
 
-
 var React = require('react');
 var ReactDOM = require('react-dom');
 

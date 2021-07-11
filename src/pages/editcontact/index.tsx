@@ -6,25 +6,25 @@ import {
 } from 'react-router-dom';
 import { EditContact } from "../../components/editcontact";
 
-export const EditContactPage = () => {
+export const EditContactPage = (props) => {
     const { contactId } = useParams();
 
-    const [appContactInfoState, setContactInfoState] = useState({
-        info: null
+    const { addLogRequest } = props;
+
+    const [contactInfoState, setContactInfoState] = useState({
+        info: null, loading: true,
     });
 
     useEffect(() => {
+        addLogRequest("GET запрос .../contacts/" + contactId);
         const apiUrl = '../src/pages/editcontact/' + contactId + '.json';
         fetch(apiUrl)
-            .then((response) => response.json())
-            //.then((data) => console.log('This is your data', data));
-            .then((data) => setContactInfoState({ info: data }));
+            .then((response) => { return response.json() })
+            .then((data) =>  setContactInfoState({ info: data, loading: false }));
     }, [setContactInfoState]);
 
-    
-
     return (
-        <EditContact type="edit_contact" setContactInfoState={setContactInfoState} appContactInfoState={appContactInfoState} />
+        <EditContact type="edit_contact" setContactInfoState={setContactInfoState} contactInfoState={contactInfoState} addLogRequest={addLogRequest }/>
     )
 
 };
